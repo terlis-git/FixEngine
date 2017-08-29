@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorinterval="30" status="info" strict="true">
+    <Properties>
+        <Property name="DefaultLogfileName">FixEngineLogger.log</Property>
+        <Property name="ExecutionReportLogfileName">Executions.log</Property>
+    </Properties>
+    <Appenders>
+        <Appender type="Console" name="Console">
+            <Layout type="PatternLayout" pattern="%d %p [%t] %m%n" />
+        </Appender>
+        <Appender type="File" name="ExecutionReport" fileName="${ExecutionReportLogfileName}">
+            <Layout type="PatternLayout" pattern="%C{1}.%M %m %ex%n" />
+        </Appender>
+        <Appender type="File" name="DefaultFile" fileName="${DefaultLogfileName}">
+            <Layout type="PatternLayout" pattern="%d %p %C{1.} [%t] %m%n" />
+        </Appender>
+    </Appenders>
+    <Loggers>
+    	<Logger name="com.snap.engine.MessageProcessor" level="debug" additivity="true">
+    		<appender-ref ref="ExecutionReport" level="debug"/>
+    	</Logger>
+        <Root level="debug">
+            <AppenderRef ref="DefaultFile" />
+        </Root>
+    </Loggers>
+</Configuration>
